@@ -39,5 +39,5 @@ The scaler is fitted on the training data and then used to transform both the tr
 Output and Results
 The script prints the features before and after scaling for both the training and testing sets to demonstrate the effect of feature scaling.
 
-##Summary
+Summary
 This project showcases a fundamental process in data preprocessing, ensuring that the data is clean, well-formatted, and appropriately scaled for machine learning models. Each step in the process is crucial for building robust and accurate models.
