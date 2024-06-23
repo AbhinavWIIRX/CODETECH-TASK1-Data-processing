@@ -1,8 +1,13 @@
 # CODETECH-TASK1-Data-processing
 **NAME:** ABHINAV KAUSHIK
+
 **COMPANY:** CODTECH IT SOLUTION
+
 **ID:** CT08SP1029
+
 **DOMAIN:** ARTIFICIAL INTELLIGENCE
+
+**MENTOR:** SRAVANI GOUNI
 
 ## Overview of the project
 
@@ -36,8 +41,11 @@ The data is divided into training and testing sets using train_test_split from s
 6. Feature Scaling
 Feature scaling is crucial to ensure that numerical features contribute equally to the model. This is done using StandardScaler from sklearn:
 The scaler is fitted on the training data and then used to transform both the training and testing data to ensure that the model does not have access to the testing data during training.
-Output and Results
+7. Output and Results
 The script prints the features before and after scaling for both the training and testing sets to demonstrate the effect of feature scaling.
+![Screenshot 2024-06-24 022322](https://github.com/AbhinavWIIRX/CODETECH-TASK1-Data-processing/assets/173410572/1c23d7f7-b73d-456e-9e3a-527b57dbd0db)
+
 
 Summary
+
 This project showcases a fundamental process in data preprocessing, ensuring that the data is clean, well-formatted, and appropriately scaled for machine learning models. Each step in the process is crucial for building robust and accurate models.
