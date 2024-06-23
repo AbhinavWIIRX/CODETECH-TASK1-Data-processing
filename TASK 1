@@ -1,0 +1,121 @@
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler
+
+# Sample DataFrame creation (replace this with your dataset)
+data = {
+    'age': [25, 30, 35, np.nan, 45, 50, 55, 60, 65, 70],
+    'salary': [50000, 54000, 58000, 62000, 66000, np.nan, 74000, 78000, 82000, 86000],
+    'department': ['sales', 'engineering', 'engineering', 'sales', np.nan, 'engineering', 'hr', 'hr', 'sales', 'sales']
+}
+df = pd.DataFrame(data)
+
+# Handle missing values
+imputer = SimpleImputer(strategy='mean')
+df['age'] = imputer.fit_transform(df[['age']])
+df['salary'] = imputer.fit_transform(df[['salary']])
+df['department'].fillna(df['department'].mode()[0], inplace=True)
+
+# Encoding categorical variables
+df = pd.get_dummies(df, columns=['department'], drop_first=True)
+
+# Splitting data into features and target variable
+X = df.drop('salary', axis=1)
+y = df['salary']
+
+# Splitting the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Feature Scaling
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# Output
+print("\nTraining Features Before Scaling:\n", X_train)
+print("\nTraining Features After Scaling:\n", X_train_scaled)
+print("\nTesting Features Before Scaling:\n", X_test)
+print("\nTesting Features After Scaling:\n", X_test_scaled)
+
+
+#END
+
+*/The code provided demonstrates a typical data preprocessing workflow for a dataset using pandas and scikit-learn. Here is a step-by-step description of the code:
+
+### Step-by-Step Description
+
+1. **Importing Libraries:**
+   ```python
+   import pandas as pd
+   import numpy as np
+   from sklearn.model_selection import train_test_split
+   from sklearn.impute import SimpleImputer
+   from sklearn.preprocessing import StandardScaler
+   ```
+   - `pandas` and `numpy` are used for data manipulation and handling missing values.
+   - `train_test_split` is used to split the dataset into training and testing sets.
+   - `SimpleImputer` is used for handling missing values.
+   - `StandardScaler` is used for feature scaling.
+
+2. **Sample DataFrame Creation:**
+   ```python
+   data = {
+       'age': [25, 30, 35, np.nan, 45, 50, 55, 60, 65, 70],
+       'salary': [50000, 54000, 58000, 62000, 66000, np.nan, 74000, 78000, 82000, 86000],
+       'department': ['sales', 'engineering', 'engineering', 'sales', np.nan, 'engineering', 'hr', 'hr', 'sales', 'sales']
+   }
+   df = pd.DataFrame(data)
+   ```
+   - A sample DataFrame `df` is created with columns 'age', 'salary', and 'department'. Some values are missing (`np.nan`).
+
+3. **Handling Missing Values:**
+   ```python
+   imputer = SimpleImputer(strategy='mean')
+   df['age'] = imputer.fit_transform(df[['age']])
+   df['salary'] = imputer.fit_transform(df[['salary']])
+   df['department'].fillna(df['department'].mode()[0], inplace=True)
+   ```
+   - `SimpleImputer` is used to replace missing values in the 'age' and 'salary' columns with the mean of the respective columns.
+   - The mode (most frequent value) is used to fill missing values in the 'department' column.
+
+4. **Encoding Categorical Variables:**
+   ```python
+   df = pd.get_dummies(df, columns=['department'], drop_first=True)
+   ```
+   - `pd.get_dummies` is used to convert the 'department' categorical variable into one-hot encoded variables, dropping the first category to avoid multicollinearity.
+
+5. **Splitting Data into Features and Target Variable:**
+   ```python
+   X = df.drop('salary', axis=1)
+   y = df['salary']
+   ```
+   - The feature matrix `X` is created by dropping the 'salary' column.
+   - The target variable `y` is the 'salary' column.
+
+6. **Splitting the Dataset into Training and Testing Sets:**
+   ```python
+   X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+   ```
+   - `train_test_split` splits the dataset into training (80%) and testing (20%) sets.
+
+7. **Feature Scaling:**
+   ```python
+   scaler = StandardScaler()
+   X_train_scaled = scaler.fit_transform(X_train)
+   X_test_scaled = scaler.transform(X_test)
+   ```
+   - `StandardScaler` standardizes features by removing the mean and scaling to unit variance.
+   - The scaler is fitted on the training set and then applied to both the training and testing sets.
+
+8. **Output:**
+   ```python
+   print("\nTraining Features Before Scaling:\n", X_train)
+   print("\nTraining Features After Scaling:\n", X_train_scaled)
+   print("\nTesting Features Before Scaling:\n", X_test)
+   print("\nTesting Features After Scaling:\n", X_test_scaled)
+   ```
+   - The code prints the training and testing features before and after scaling to show the effect of standardization.
+
+This preprocessing workflow ensures the dataset is clean, transformed, and ready for training AI models. /*
